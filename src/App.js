@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { NotFound } from 'components'
+import { MainLayout } from 'components/Layout'
+import { Fragment } from 'react'
+import { Outlet, Route, Routes } from 'react-router-dom'
+import { publicRoutes } from 'routes'
+import './app.scss'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className="app">
+			<Outlet />
+			<Routes>
+				{publicRoutes.map(({ path, component, layout }, idx) => {
+					let Layout = MainLayout
+
+					if (layout) {
+						Layout = layout
+					} else if (layout === null) {
+						Layout = Fragment
+					}
+					console.log(Layout)
+
+					return <Route key={idx} path={path} element={<Layout>{component}</Layout>} />
+				})}
+				<Route path="*" element={<NotFound />} />
+			</Routes>
+		</div>
+	)
 }
 
-export default App;
+export default App
