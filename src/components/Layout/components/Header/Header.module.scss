@@ -84,4 +84,28 @@
             background-color: rgba(22, 24, 35, 0.06);
         }
     }
+
+    .search-result {
+        width: 361px;
+    }
+
+    .search-title {
+        height: 30px;
+        padding: 5px 12px;
+        font-size: 1.4rem;
+        line-height: 20px;
+        font-weight: 600;
+        color: rgba(22, 24, 35, 0.5);
+    }
+}
+
+.plus-icon {
+    font-weight: 600;
+    color: rgb(22, 24, 35);
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    border-radius: 2px;
+
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.03);
+    }
 }
