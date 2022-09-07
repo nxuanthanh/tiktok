@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Header from '../components/Header'
 
-function MainLayout({ children }) {
+function HeaderOnly({ children }) {
     return (
         <div>
             <Header />
@@ -13,6 +13,6 @@ function MainLayout({ children }) {
     )
 }
 
-MainLayout.propTypes = {}
+HeaderOnly.propTypes = {}
 
-export default MainLayout
+export default HeaderOnly

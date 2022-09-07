@@ -18,7 +18,6 @@ function App() {
 					} else if (layout === null) {
 						Layout = Fragment
 					}
-					console.log(Layout)
 
 					return <Route key={idx} path={path} element={<Layout>{component}</Layout>} />
 				})}
