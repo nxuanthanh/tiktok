@@ -1,7 +1,6 @@
 const images = {
 	logo: require('./logo.svg').default,
-	message: require('./message.svg').default,
-	notify: require('./notify.svg').default,
+	fallback: require('./no-image.png'),
 }
 
 export default images

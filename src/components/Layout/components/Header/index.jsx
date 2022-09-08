@@ -1,28 +1,34 @@
-import { faCircleQuestion, faKeyboard } from '@fortawesome/free-regular-svg-icons'
 import {
 	faCircleXmark,
-	faCoins,
 	faEllipsisVertical,
-	faGear,
-	faLanguage,
 	faMagnifyingGlass,
 	faPlus,
-	faSignOut,
 	faSpinner,
-	faUser,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Tippy from '@tippyjs/react'
 import HeadlessTippy from '@tippyjs/react/headless'
+import {
+	Keyboard,
+	Language,
+	Logout,
+	Message,
+	Notify,
+	Profile,
+	Question,
+	Setting,
+	Tiktok,
+} from 'assets/icons'
 import images from 'assets/images'
 import classNames from 'classnames/bind'
 import AccountItem from 'components/AccountItem'
 import Button from 'components/Button'
+import Image from 'components/image'
 import Popper from 'components/Popper'
 import Menu from 'components/Popper/Menu'
 import { useState } from 'react'
-import styles from './Header.module.scss'
 import 'tippy.js/dist/tippy.css'
+import styles from './Header.module.scss'
 const cx = classNames.bind(styles)
 
 function Header(props) {
@@ -31,7 +37,7 @@ function Header(props) {
 
 	const menuItemList = [
 		{
-			icon: <FontAwesomeIcon icon={faLanguage} />,
+			icon: <Language />,
 			label: 'English',
 			children: {
 				title: 'Language',
@@ -42,35 +48,35 @@ function Header(props) {
 			},
 		},
 		{
-			icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+			icon: <Question />,
 			label: 'Feedback and help',
 			to: '/feedback',
 		},
 		{
-			icon: <FontAwesomeIcon icon={faKeyboard} />,
+			icon: <Keyboard />,
 			label: 'Keyboard shortcuts',
 		},
 	]
 
 	const hasUserMenu = [
 		{
-			icon: <FontAwesomeIcon icon={faUser} />,
+			icon: <Profile />,
 			label: 'View profile',
 			to: '/@vtvt24',
 		},
 		{
-			icon: <FontAwesomeIcon icon={faCoins} />,
+			icon: <Tiktok />,
 			label: 'Get coins',
 			to: '/coin',
 		},
 		{
-			icon: <FontAwesomeIcon icon={faGear} />,
+			icon: <Setting />,
 			label: 'Settings',
 			to: '/settings',
 		},
 		...menuItemList,
 		{
-			icon: <FontAwesomeIcon icon={faSignOut} />,
+			icon: <Logout />,
 			label: 'Log out',
 			to: '/logout',
 			separate: true,
@@ -84,7 +90,7 @@ function Header(props) {
 	return (
 		<header className={cx('wrapper')}>
 			<div className={cx('inner')}>
-				<img src={images.logo} alt="" />
+				<img src={images.logo} alt="" className={cx('logo')} />
 
 				<HeadlessTippy
 					interactive
@@ -124,10 +130,10 @@ function Header(props) {
 					{currentUser ? (
 						<>
 							<Tippy content={'Messages'}>
-								<img src={images.message} alt="" className={cx('message')} />
+								<Message className={cx('message')} />
 							</Tippy>
 							<Tippy content={'Inbox'}>
-								<img src={images.notify} alt="" className={cx('notify')} />
+								<Notify className={cx('notify')} />
 							</Tippy>
 						</>
 					) : (
@@ -140,10 +146,11 @@ function Header(props) {
 						<button className={cx(`${currentUser ? 'avatar-btn' : 'more-btn'}`)}>
 							{currentUser ? (
 								<>
-									<img
+									<Image
 										className={cx('user-avatar')}
 										src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/f485490f970a0c1ccbf158b9e468450b~c5_100x100.jpeg?x-expires=1662706800&x-signature=LP7skuuaeqlmGOqvqZRvvJKk9%2Fc%3D"
 										alt="vtv24"
+										// fallback="https://yt3.ggpht.com/yti/AJo0G0mCy6ZyPqQ8Wo82XcG89NDUROvwEyC86v2oS_R3bg=s88-c-k-c0x00ffffff-no-rj-mo"
 									/>
 								</>
 							) : (

@@ -21,6 +21,10 @@
         padding: 0 $layout-horizontal-spacer;
     }
 
+    .logo {
+        user-select: none;
+    }
+
     .search {
         display: flex;
         width: 361px;
