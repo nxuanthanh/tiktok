@@ -1,14 +1,19 @@
 import { faCircleQuestion, faKeyboard } from '@fortawesome/free-regular-svg-icons'
 import {
 	faCircleXmark,
+	faCoins,
 	faEllipsisVertical,
+	faGear,
 	faLanguage,
 	faMagnifyingGlass,
 	faPlus,
+	faSignOut,
 	faSpinner,
+	faUser,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Tippy from '@tippyjs/react/headless'
+import Tippy from '@tippyjs/react'
+import HeadlessTippy from '@tippyjs/react/headless'
 import images from 'assets/images'
 import classNames from 'classnames/bind'
 import AccountItem from 'components/AccountItem'
@@ -17,11 +22,14 @@ import Popper from 'components/Popper'
 import Menu from 'components/Popper/Menu'
 import { useState } from 'react'
 import styles from './Header.module.scss'
+import 'tippy.js/dist/tippy.css'
 const cx = classNames.bind(styles)
 
 function Header(props) {
 	const [searchResult, setSearchResult] = useState([])
-	const MenuItemList = [
+	const currentUser = true
+
+	const menuItemList = [
 		{
 			icon: <FontAwesomeIcon icon={faLanguage} />,
 			label: 'English',
@@ -44,6 +52,31 @@ function Header(props) {
 		},
 	]
 
+	const hasUserMenu = [
+		{
+			icon: <FontAwesomeIcon icon={faUser} />,
+			label: 'View profile',
+			to: '/@vtvt24',
+		},
+		{
+			icon: <FontAwesomeIcon icon={faCoins} />,
+			label: 'Get coins',
+			to: '/coin',
+		},
+		{
+			icon: <FontAwesomeIcon icon={faGear} />,
+			label: 'Settings',
+			to: '/settings',
+		},
+		...menuItemList,
+		{
+			icon: <FontAwesomeIcon icon={faSignOut} />,
+			label: 'Log out',
+			to: '/logout',
+			separate: true,
+		},
+	]
+
 	const handleOnchange = () => {
 		// something to do here...
 	}
@@ -53,7 +86,7 @@ function Header(props) {
 			<div className={cx('inner')}>
 				<img src={images.logo} alt="" />
 
-				<Tippy
+				<HeadlessTippy
 					interactive
 					visible={searchResult.length > 0}
 					render={(attrs) => (
@@ -82,17 +115,42 @@ function Header(props) {
 							<FontAwesomeIcon icon={faMagnifyingGlass} />
 						</button>
 					</div>
-				</Tippy>
+				</HeadlessTippy>
 
 				<div className={cx('actions')}>
 					<Button outline className={cx('plus-icon')} leftIcon={<FontAwesomeIcon icon={faPlus} />}>
 						Upload
 					</Button>
-					<Button primary>Login</Button>
+					{currentUser ? (
+						<>
+							<Tippy content={'Messages'}>
+								<img src={images.message} alt="" className={cx('message')} />
+							</Tippy>
+							<Tippy content={'Inbox'}>
+								<img src={images.notify} alt="" className={cx('notify')} />
+							</Tippy>
+						</>
+					) : (
+						<>
+							<Button primary>Login</Button>
+						</>
+					)}
 
-					<Menu items={MenuItemList} onChange={handleOnchange}>
-						<button className={cx('more-btn')}>
-							<FontAwesomeIcon icon={faEllipsisVertical} />
+					<Menu items={currentUser ? hasUserMenu : menuItemList} onChange={handleOnchange}>
+						<button className={cx(`${currentUser ? 'avatar-btn' : 'more-btn'}`)}>
+							{currentUser ? (
+								<>
+									<img
+										className={cx('user-avatar')}
+										src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/f485490f970a0c1ccbf158b9e468450b~c5_100x100.jpeg?x-expires=1662706800&x-signature=LP7skuuaeqlmGOqvqZRvvJKk9%2Fc%3D"
+										alt="vtv24"
+									/>
+								</>
+							) : (
+								<>
+									<FontAwesomeIcon icon={faEllipsisVertical} />
+								</>
+							)}
 						</button>
 					</Menu>
 				</div>

@@ -111,9 +111,35 @@
     }
 }
 
+.actions {
+    display: flex;
+    align-items: center;
+}
+
+.message {
+    margin-left: 16px;
+    padding: 0px 3px 0;
+}
+
+.notify {
+    margin-left: 16px;
+}
+
 .more-btn {
     cursor: pointer;
     margin-left: 16px;
     padding: 4px 12px;
     background-color: transparent;
+}
+
+.avatar-btn {
+    margin-left: 24px;
+    background-color: transparent;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%;
 }
