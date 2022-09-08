@@ -18,6 +18,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding: 0 $layout-horizontal-spacer;
     }
 
     .search {
@@ -100,12 +101,19 @@
 }
 
 .plus-icon {
-    font-weight: 600;
     color: rgb(22, 24, 35);
     border: 1px solid rgba(22, 24, 35, 0.12);
     border-radius: 2px;
 
     &:hover {
+        border: 1px solid rgba(22, 24, 35, 0.12);
         background-color: rgba(22, 24, 35, 0.03);
     }
+}
+
+.more-btn {
+    cursor: pointer;
+    margin-left: 16px;
+    padding: 4px 12px;
+    background-color: transparent;
 }

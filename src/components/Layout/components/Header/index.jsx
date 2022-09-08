@@ -1,62 +1,104 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import styles from './Header.module.scss'
-import classNames from 'classnames/bind'
-import images from 'assets/images'
+import { faCircleQuestion, faKeyboard } from '@fortawesome/free-regular-svg-icons'
+import {
+	faCircleXmark,
+	faEllipsisVertical,
+	faLanguage,
+	faMagnifyingGlass,
+	faPlus,
+	faSpinner,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleXmark, faMagnifyingGlass, faPlus, faSpinner } from '@fortawesome/free-solid-svg-icons'
-import Tippy from '@tippyjs/react/headless';
-import Popper from 'components/Popper'
+import Tippy from '@tippyjs/react/headless'
+import images from 'assets/images'
+import classNames from 'classnames/bind'
 import AccountItem from 'components/AccountItem'
 import Button from 'components/Button'
+import Popper from 'components/Popper'
+import Menu from 'components/Popper/Menu'
+import { useState } from 'react'
+import styles from './Header.module.scss'
 const cx = classNames.bind(styles)
 
 function Header(props) {
-    const [searchResult, setSearchResult] = useState([])
-    return (
-        <header className={cx('wrapper')}>
-            <div className={cx('inner')}>
-                <img src={images.logo} alt="" />
+	const [searchResult, setSearchResult] = useState([])
+	const MenuItemList = [
+		{
+			icon: <FontAwesomeIcon icon={faLanguage} />,
+			label: 'English',
+			children: {
+				title: 'Language',
+				data: [
+					{ code: 'en', label: 'English' },
+					{ code: 'vi', label: 'Vietlabelse' },
+				],
+			},
+		},
+		{
+			icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+			label: 'Feedback and help',
+			to: '/feedback',
+		},
+		{
+			icon: <FontAwesomeIcon icon={faKeyboard} />,
+			label: 'Keyboard shortcuts',
+		},
+	]
 
-                <Tippy
-                    interactive
-                    visible={searchResult.length > 0}
-                    render={attrs => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <Popper>
-                                <h3 className={cx('search-title')}>Accounts</h3>
+	const handleOnchange = () => {
+		// something to do here...
+	}
 
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                            </Popper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input placeholder='Search accounts and videos' spellCheck={false} />
-                        {/* <button className={cx('clear')}>
-                        <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                        
-                    <FontAwesomeIcon className={cx('loading')} icon={faSpinner} /> */}
+	return (
+		<header className={cx('wrapper')}>
+			<div className={cx('inner')}>
+				<img src={images.logo} alt="" />
 
-                        <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-                    </div>
-                </Tippy>
+				<Tippy
+					interactive
+					visible={searchResult.length > 0}
+					render={(attrs) => (
+						<div className={cx('search-result')} tabIndex="-1" {...attrs}>
+							<Popper>
+								<h3 className={cx('search-title')}>Accounts</h3>
 
-                <div className={cx('actions')}>
-                    <Button outline leftIcon={<FontAwesomeIcon icon={faPlus} />} >Upload</Button>
-                    <Button primary className={cx('plus-icon')}>Login</Button>
-                </div>
-            </div>
+								<AccountItem />
+								<AccountItem />
+								<AccountItem />
+								<AccountItem />
+								<AccountItem />
+							</Popper>
+						</div>
+					)}
+				>
+					<div className={cx('search')}>
+						<input placeholder="Search accounts and videos" spellCheck={false} />
+						<button className={cx('clear')}>
+							<FontAwesomeIcon icon={faCircleXmark} />
+						</button>
 
-        </header >
-    )
+						<FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
+
+						<button className={cx('search-btn')}>
+							<FontAwesomeIcon icon={faMagnifyingGlass} />
+						</button>
+					</div>
+				</Tippy>
+
+				<div className={cx('actions')}>
+					<Button outline className={cx('plus-icon')} leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+						Upload
+					</Button>
+					<Button primary>Login</Button>
+
+					<Menu items={MenuItemList} onChange={handleOnchange}>
+						<button className={cx('more-btn')}>
+							<FontAwesomeIcon icon={faEllipsisVertical} />
+						</button>
+					</Menu>
+				</div>
+			</div>
+		</header>
+	)
 }
 
 Header.propTypes = {}

@@ -1,0 +1,17 @@
+@use "scss" as *;
+
+.menu-item {
+    margin-left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 11px 16px;
+    border-radius: 0;
+    line-height: 1.8rem;
+    font-weight: 500;
+
+    &:hover {
+        background: rgba(22, 24, 35, 0.03);
+    }
+}

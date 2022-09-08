@@ -7,7 +7,8 @@
 }
 
 .container {
-    width: 1150px;
+    width: $width-content;
+    padding: 0 $layout-horizontal-spacer;
     display: flex;
 }
 
