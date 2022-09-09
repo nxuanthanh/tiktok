@@ -1,7 +1,7 @@
 import { faCircleXmark, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import HeadlessTippy from '@tippyjs/react/headless'
-import userApi from 'api/userApi'
+import userApi from 'services/userApi'
 import classNames from 'classnames/bind'
 import AccountItem from 'components/AccountItem'
 import { useDebounce } from 'components/hooks'

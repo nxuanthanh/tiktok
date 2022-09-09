@@ -1,5 +1,5 @@
 import { NotFound } from 'components'
-import { MainLayout } from 'components/Layout'
+import { MainLayout } from 'layouts'
 import { Fragment } from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
 import { publicRoutes } from 'routes'

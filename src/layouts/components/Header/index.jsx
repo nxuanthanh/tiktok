@@ -7,7 +7,7 @@ import classNames from 'classnames/bind'
 import Button from 'components/Button'
 import Image from 'components/image'
 import Menu from 'components/Popper/Menu'
-import routes from 'config/routes'
+import config from 'config'
 import { Link } from 'react-router-dom'
 import 'tippy.js/dist/tippy.css'
 import Search from '../Search'
@@ -32,7 +32,7 @@ function Header(props) {
 		{
 			icon: <Question />,
 			label: 'Feedback and help',
-			to: routes.feedback,
+			to: config.routes.feedback,
 		},
 		{
 			icon: <Keyboard />,
@@ -44,23 +44,23 @@ function Header(props) {
 		{
 			icon: <Profile />,
 			label: 'View profile',
-			to: routes.profile,
+			to: config.routes.profile,
 		},
 		{
 			icon: <Tiktok />,
 			label: 'Get coins',
-			to: routes.coin,
+			to: config.routes.coin,
 		},
 		{
 			icon: <Setting />,
 			label: 'Settings',
-			to: routes.setting,
+			to: config.routes.setting,
 		},
 		...menuItemList,
 		{
 			icon: <Logout />,
 			label: 'Log out',
-			to: routes.logout,
+			to: config.routes.logout,
 			separate: true,
 		},
 	]
@@ -72,7 +72,7 @@ function Header(props) {
 	return (
 		<header className={cx('wrapper')}>
 			<div className={cx('inner')}>
-				<Link to={routes.home} className={cx('logo-link')}>
+				<Link to={config.routes.home} className={cx('logo-link')}>
 					<img src={images.logo} alt="" className={cx('logo')} />
 				</Link>
 
