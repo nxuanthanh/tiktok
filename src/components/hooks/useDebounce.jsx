@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 
-function useDebounce({ value, delay }) {
+function useDebounce(value, delay) {
 	const [debounce, setDebounce] = useState(value)
 
 	useEffect(() => {

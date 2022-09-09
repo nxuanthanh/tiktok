@@ -1,6 +1,7 @@
 import { faCircleXmark, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import HeadlessTippy from '@tippyjs/react/headless'
+import userApi from 'api/userApi'
 import classNames from 'classnames/bind'
 import AccountItem from 'components/AccountItem'
 import { useDebounce } from 'components/hooks'
@@ -40,17 +41,17 @@ function Search(props) {
 			return
 		}
 
-		setLoading(true)
+		;(async () => {
+			try {
+				setLoading(true)
 
-		fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${debounced}&type=less`)
-			.then((res) => res.json())
-			.then((res) => {
+				const res = await userApi.getAll({ q: debounced, type: 'less' })
 				setSearchResult(res.data)
 				setLoading(false)
-			})
-			.catch(() => {
-				setLoading(false)
-			})
+			} catch (error) {
+				console.log('Something wrong when fetching user data')
+			}
+		})()
 	}, [debounced])
 
 	return (
