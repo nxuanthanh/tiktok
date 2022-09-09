@@ -22,7 +22,11 @@ function Search(props) {
 	const debounced = useDebounce(searchValue, 500)
 
 	const handleOnChange = (e) => {
-		setSearchValue(e.target.value)
+		const _searchValue = e.target.value
+
+		if (!_searchValue.startsWith(' ')) {
+			setSearchValue(_searchValue)
+		}
 	}
 
 	const handleOnClear = (e) => {
@@ -55,44 +59,46 @@ function Search(props) {
 	}, [debounced])
 
 	return (
-		<HeadlessTippy
-			interactive
-			visible={showSearchResult && searchResult.length > 0}
-			onClickOutside={handleHideSearchResult}
-			render={(attrs) => (
-				<div className={cx('search-result')} tabIndex="-1" {...attrs}>
-					<Popper>
-						<h3 className={cx('search-title')}>Accounts</h3>
+		<div>
+			<HeadlessTippy
+				interactive
+				visible={showSearchResult && searchResult.length > 0}
+				onClickOutside={handleHideSearchResult}
+				render={(attrs) => (
+					<div className={cx('search-result')} tabIndex="-1" {...attrs}>
+						<Popper>
+							<h3 className={cx('search-title')}>Accounts</h3>
 
-						{searchResult.map((result) => (
-							<AccountItem key={result.id} data={result} />
-						))}
-					</Popper>
-				</div>
-			)}
-		>
-			<div className={cx('search')}>
-				<input
-					ref={inputRef}
-					placeholder="Search accounts and videos"
-					spellCheck={false}
-					value={searchValue}
-					onChange={handleOnChange}
-					onFocus={() => setShowSearchResult(true)}
-				/>
-				{searchValue && !loading && (
-					<button className={cx('clear')} onClick={handleOnClear}>
-						<FontAwesomeIcon icon={faCircleXmark} />
-					</button>
+							{searchResult.map((result) => (
+								<AccountItem key={result.id} data={result} />
+							))}
+						</Popper>
+					</div>
 				)}
+			>
+				<div className={cx('search')}>
+					<input
+						ref={inputRef}
+						placeholder="Search accounts and videos"
+						spellCheck={false}
+						value={searchValue}
+						onChange={handleOnChange}
+						onFocus={() => setShowSearchResult(true)}
+					/>
+					{searchValue && !loading && (
+						<button className={cx('clear')} onClick={handleOnClear}>
+							<FontAwesomeIcon icon={faCircleXmark} />
+						</button>
+					)}
 
-				{loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
+					{loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
-				<button className={cx('search-btn')}>
-					<FontAwesomeIcon icon={faMagnifyingGlass} />
-				</button>
-			</div>
-		</HeadlessTippy>
+					<button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
+						<FontAwesomeIcon icon={faMagnifyingGlass} />
+					</button>
+				</div>
+			</HeadlessTippy>
+		</div>
 	)
 }
 

@@ -9,7 +9,7 @@ import Header from './Header'
 
 const cx = classNames.bind(styles)
 
-function Menu({ children, items = [], onChange }) {
+function Menu({ children, items = [], hideOnClick = false, onChange }) {
 	const [history, setHistory] = useState([{ data: items }])
 
 	const current = history[history.length - 1]
@@ -17,6 +17,7 @@ function Menu({ children, items = [], onChange }) {
 	return (
 		<Tippy
 			interactive
+			hideOnClick={hideOnClick}
 			placement="bottom-end"
 			delay={[0, 600]}
 			offset={[12, 8]}
@@ -34,23 +35,25 @@ function Menu({ children, items = [], onChange }) {
 								}}
 							/>
 						)}
-						{current.data.map((item, idx) => {
-							const isParent = !!item.children
+						<div className={cx('menu-body')}>
+							{current.data.map((item, idx) => {
+								const isParent = !!item.children
 
-							return (
-								<MenuItem
-									key={idx}
-									data={item}
-									onClick={() => {
-										if (isParent) {
-											setHistory((prev) => [...prev, item.children])
-										} else {
-											onChange ?? onChange()
-										}
-									}}
-								/>
-							)
-						})}
+								return (
+									<MenuItem
+										key={idx}
+										data={item}
+										onClick={() => {
+											if (isParent) {
+												setHistory((prev) => [...prev, item.children])
+											} else {
+												onChange ?? onChange()
+											}
+										}}
+									/>
+								)
+							})}
+						</div>
 					</Popper>
 				</div>
 			)}

@@ -7,9 +7,10 @@
 }
 
 .container {
+    display: flex;
     width: $width-content;
     padding: 0 $layout-horizontal-spacer;
-    display: flex;
+    margin-top: $header-height;
 }
 
 .content {

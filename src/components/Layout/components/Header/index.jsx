@@ -1,22 +1,14 @@
 import { faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Tippy from '@tippyjs/react'
-import {
-	Keyboard,
-	Language,
-	Logout,
-	Message,
-	Notify,
-	Profile,
-	Question,
-	Setting,
-	Tiktok,
-} from 'assets/icons'
+import { Keyboard, Language, Logout, Message, Notify, Profile, Question, Setting, Tiktok } from 'assets/icons'
 import images from 'assets/images'
 import classNames from 'classnames/bind'
 import Button from 'components/Button'
 import Image from 'components/image'
 import Menu from 'components/Popper/Menu'
+import routes from 'config/routes'
+import { Link } from 'react-router-dom'
 import 'tippy.js/dist/tippy.css'
 import Search from '../Search'
 import styles from './Header.module.scss'
@@ -40,7 +32,7 @@ function Header(props) {
 		{
 			icon: <Question />,
 			label: 'Feedback and help',
-			to: '/feedback',
+			to: routes.feedback,
 		},
 		{
 			icon: <Keyboard />,
@@ -52,23 +44,23 @@ function Header(props) {
 		{
 			icon: <Profile />,
 			label: 'View profile',
-			to: '/@vtvt24',
+			to: routes.profile,
 		},
 		{
 			icon: <Tiktok />,
 			label: 'Get coins',
-			to: '/coin',
+			to: routes.coin,
 		},
 		{
 			icon: <Setting />,
 			label: 'Settings',
-			to: '/settings',
+			to: routes.setting,
 		},
 		...menuItemList,
 		{
 			icon: <Logout />,
 			label: 'Log out',
-			to: '/logout',
+			to: routes.logout,
 			separate: true,
 		},
 	]
@@ -80,7 +72,9 @@ function Header(props) {
 	return (
 		<header className={cx('wrapper')}>
 			<div className={cx('inner')}>
-				<img src={images.logo} alt="" className={cx('logo')} />
+				<Link to={routes.home} className={cx('logo-link')}>
+					<img src={images.logo} alt="" className={cx('logo')} />
+				</Link>
 
 				<Search />
 
