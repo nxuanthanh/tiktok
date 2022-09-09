@@ -22,6 +22,4 @@ function Tiktok({ className, width = '20', height = '20' }) {
 	)
 }
 
-Tiktok.propTypes = {}
-
 export default Tiktok

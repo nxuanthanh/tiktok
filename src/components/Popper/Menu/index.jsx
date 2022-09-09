@@ -29,7 +29,7 @@ function Menu({ children, items = [], hideOnClick = false, onChange }) {
 					<Popper className={cx('menu-content')}>
 						{history.length > 1 && (
 							<Header
-								title="Lauguages"
+								title={current.title}
 								onBack={() => {
 									setHistory((prev) => prev.slice(0, prev.length - 1))
 								}}
@@ -63,6 +63,11 @@ function Menu({ children, items = [], hideOnClick = false, onChange }) {
 	)
 }
 
-Menu.propTypes = {}
+Menu.propTypes = {
+	children: PropTypes.node.isRequired,
+	items: PropTypes.array,
+	hideOnClick: PropTypes.bool,
+	onChange: PropTypes.func,
+}
 
 export default Menu

@@ -17,6 +17,4 @@ function Logout({ className, width = '20', height = '20' }) {
 	)
 }
 
-Logout.propTypes = {}
-
 export default Logout

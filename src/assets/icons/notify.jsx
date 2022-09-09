@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-
+import PropTypes from 'prop-types'
 function Notify({ className, width = '32', height = '32' }, ref) {
 	return (
 		<svg
@@ -20,6 +20,10 @@ function Notify({ className, width = '32', height = '32' }, ref) {
 	)
 }
 
-Notify.propTypes = {}
+Notify.propTypes = {
+	className: PropTypes.string,
+	width: PropTypes.string,
+	height: PropTypes.string,
+}
 
 export default forwardRef(Notify)

@@ -17,6 +17,4 @@ function Profile({ className, width = '20', height = '20' }) {
 	)
 }
 
-Profile.propTypes = {}
-
 export default Profile

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { forwardRef } from 'react'
 
 function Message({ className, width = '26', height = '29' }, ref) {
@@ -20,6 +21,10 @@ function Message({ className, width = '26', height = '29' }, ref) {
 	)
 }
 
-Message.propTypes = {}
+Message.propTypes = {
+	className: PropTypes.string,
+	width: PropTypes.string,
+	height: PropTypes.string,
+}
 
 export default forwardRef(Message)

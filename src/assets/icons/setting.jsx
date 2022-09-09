@@ -17,6 +17,4 @@ function Setting({ className, width = '20', height = '20' }) {
 	)
 }
 
-Setting.propTypes = {}
-
 export default Setting

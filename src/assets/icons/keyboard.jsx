@@ -17,6 +17,4 @@ function Keyboard({ className, width = '20', height = '20' }) {
 	)
 }
 
-Keyboard.propTypes = {}
-
 export default Keyboard

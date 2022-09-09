@@ -17,6 +17,4 @@ function Language({ className, width = '20', height = '20' }) {
 	)
 }
 
-Language.propTypes = {}
-
 export default Language

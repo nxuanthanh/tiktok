@@ -17,6 +17,4 @@ function Question({ className, width = '20', height = '20' }) {
 	)
 }
 
-Question.propTypes = {}
-
 export default Question
