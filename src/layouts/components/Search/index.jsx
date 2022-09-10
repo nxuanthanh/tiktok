@@ -15,7 +15,7 @@ function Search(props) {
 	const [searchResult, setSearchResult] = useState([])
 	const [searchValue, setSearchValue] = useState('')
 	const [loading, setLoading] = useState(false)
-	const [showSearchResult, setShowSearchResult] = useState(true)
+	const [showSearchResult, setShowSearchResult] = useState(false)
 
 	const inputRef = useRef()
 

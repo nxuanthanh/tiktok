@@ -14,6 +14,15 @@ function Menu({ children, items = [], hideOnClick = false, onChange }) {
 
 	const current = history[history.length - 1]
 
+	const handleResetMenu = () => {
+		setHistory((prev) => prev.slice(0, 1))
+	}
+
+	// reset to first page
+	const handleBack = () => {
+		setHistory((prev) => prev.slice(0, prev.length - 1))
+	}
+
 	return (
 		<Tippy
 			interactive
@@ -21,20 +30,11 @@ function Menu({ children, items = [], hideOnClick = false, onChange }) {
 			placement="bottom-end"
 			delay={[0, 600]}
 			offset={[12, 8]}
-			onHide={() => {
-				setHistory((prev) => prev.slice(0, 1))
-			}}
+			onHide={handleResetMenu}
 			render={(attrs) => (
 				<div className={cx('menu-list')} tabIndex="-1" {...attrs}>
 					<Popper className={cx('menu-content')}>
-						{history.length > 1 && (
-							<Header
-								title={current.title}
-								onBack={() => {
-									setHistory((prev) => prev.slice(0, prev.length - 1))
-								}}
-							/>
-						)}
+						{history.length > 1 && <Header title={current.title} onBack={handleBack} />}
 						<div className={cx('menu-body')}>
 							{current.data.map((item, idx) => {
 								const isParent = !!item.children
@@ -47,7 +47,7 @@ function Menu({ children, items = [], hideOnClick = false, onChange }) {
 											if (isParent) {
 												setHistory((prev) => [...prev, item.children])
 											} else {
-												onChange ?? onChange()
+												onChange ?? onChange(item)
 											}
 										}}
 									/>
